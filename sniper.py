@@ -58,8 +58,8 @@ def generate():
     randomstring = random.choice(syllables) + random.choice(syllables)
     randomstring = randomstring[:length]
 
-print(f"[*] Checking {randomstring}")
-isitvalid(randomstring)
+    print(f"[*] Checking {randomstring}")
+    isitvalid(randomstring)
 while True:
    threading.Thread(target=generate).start()
-time.sleep(0.5)
+   time.sleep(0.5)
