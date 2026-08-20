@@ -53,7 +53,7 @@ def isitvalid(name):
 def generate():
     print("")
     l = length
-    randomstring = ''.join(random.choice(string.ascii_lowercase + string.digits + "_") for _ in range(length))
+    randomstring = ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
     print(f"[*] Checking {randomstring}")
     isitvalid(randomstring)
 
