@@ -11,7 +11,7 @@ headers = {
 }
 
 api = "https://api.mojang.com/users/profiles/minecraft/"
-webhook = "https://discord.com/api/webhooks/1540098467853238293/PIYovFb24jZJrKm65ZaScMyLeA8CUIfo20WV-0HacXfCNH1YmWyDDlOH46vq0_GxvLsx"
+webhook = "https://discord.com/api/webhooks/1540133941695094844/Z8QG38RXQ17ZI5IkgEd-HlD6Wy91AKNCFjzpgBMBP0UDjnKfkkXQUaz6GrQIHAdiaiYj"
 
 locktime = 5184000
 length = 4
@@ -53,10 +53,13 @@ def isitvalid(name):
 def generate():
     print("")
     l = length
-    randomstring = ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
-    print(f"[*] Checking {randomstring}")
-    isitvalid(randomstring)
+    syllables = ["ba","be","bi","bo","bu","da","de","di","do","du","ka","ke","ki","ko","ku","la","le","li","lo","lu","ma","me","mi","mo","mu","na","ne","ni","no","nu","ra","re","ri","ro","ru","sa","se","si","so","su","ta","te","ti","to","tu"]
 
+    randomstring = random.choice(syllables) + random.choice(syllables)
+    randomstring = randomstring[:length]
+
+print(f"[*] Checking {randomstring}")
+isitvalid(randomstring)
 while True:
-    threading.Thread(target=generate())
-    time.sleep(0.1)
+   threading.Thread(target=generate).start()
+time.sleep(0.5)
