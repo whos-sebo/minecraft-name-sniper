@@ -20,7 +20,7 @@ checked = set()
 def sendtowebhook(name):
     data = {
         "content" : "",
-        "username" : "Goose's MC Sniper"
+        "username" : "alexandru gay"
     }
     data["embeds"] = [
         {
@@ -49,17 +49,26 @@ def isitvalid(name):
             print("[!] Something went wrong! Retrying in 2s")
             time.sleep(2)
             isitvalid(name)
+length = 4
 
 def generate():
-    print("")
-    l = length
-    syllables = ["ba","be","bi","bo","bu","da","de","di","do","du","ka","ke","ki","ko","ku","la","le","li","lo","lu","ma","me","mi","mo","mu","na","ne","ni","no","nu","ra","re","ri","ro","ru","sa","se","si","so","su","ta","te","ti","to","tu"]
+    vowels = "aeiouy"
+    consonants = "bcdfghjklmnpqrstvwxz"
 
-    randomstring = random.choice(syllables) + random.choice(syllables)
-    randomstring = randomstring[:length]
+    randomstring = ""
+
+    for i in range(length):
+        if i % 2 == 0:
+            randomstring += random.choice(consonants)
+        else:
+            randomstring += random.choice(vowels)
 
     print(f"[*] Checking {randomstring}")
     isitvalid(randomstring)
+
+while True:
+    threading.Thread(target=generate).start()
+    time.sleep(0.5)
 while True:
    threading.Thread(target=generate).start()
    time.sleep(0.5)
