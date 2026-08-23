@@ -36,12 +36,11 @@ def isitvalid(name):
         return False
     else:
         try:
-              results = r.get(
+        results = r.get(
             api + name,
             headers=headers,
             timeout=10
         )
-
         if results.status_code == 404:
             checked.add(name)
             sendtowebhook(name)
