@@ -35,21 +35,27 @@ def isitvalid(name):
         print(f"[X] {name} has already been checked")
         return False
     else:
-        try:
-            results = r.get(api+name+f"?at={str(time.time()-locktime)}", headers=headers)
-            if "errorMessage" in str(results.text):
+             try:
+            results = r.get(
+                api + name + f"?at={int(time.time() - locktime)}",
+                headers=headers,
+                timeout=10
+            )
+
+            if results.status_code == 404:
                 checked.add(name)
                 sendtowebhook(name)
-                print(f"[√] {name} is available!")
+                print(f"[V] {name} is available!")
                 return True
             else:
                 print(f"[X] {name} isn't available!")
                 return False
-        except:
-            print("[!] Something went wrong! Retrying in 2s")
+
+        except Exception as e:
+            print(f"[!] Error: {e}")
             time.sleep(2)
-            isitvalid(name)
-length = 4
+            return False
+length = random.choice([4,5])
 
 def generate():
     vowels = "aeiouy"
@@ -69,6 +75,4 @@ def generate():
 while True:
     threading.Thread(target=generate).start()
     time.sleep(0.5)
-while True:
-   threading.Thread(target=generate).start()
-   time.sleep(0.5)
+
