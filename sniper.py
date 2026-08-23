@@ -36,20 +36,20 @@ def isitvalid(name):
         return False
     else:
         try:
-            results = r.get(
-                api + name + f"?at={int(time.time() - locktime)}",
-                headers=headers,
-                timeout=10
-            )
+              results = r.get(
+            api + name,
+            headers=headers,
+            timeout=10
+        )
 
-            if "errorMessage" in str(results.text):
-                checked.add(name)
-                sendtowebhook(name)
-                print(f"[V] {name} is available!")
-                return True
-            else:
-                print(f"[X] {name} isn't available!")
-                return False
+        if results.status_code == 404:
+            checked.add(name)
+            sendtowebhook(name)
+            print(f"[V] {name} may be available!")
+            return True
+        else:
+            print(f"[X] {name} is taken!")
+            return False
 
         except Exception as e:
             print(f"[!] Error: {e}")
