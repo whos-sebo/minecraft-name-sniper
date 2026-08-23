@@ -35,8 +35,8 @@ def isitvalid(name):
         print(f"[X] {name} has already been checked")
         return False
     else:
-        try:
-        results = r.get(
+   try:
+       results = r.get(
             api + name,
             headers=headers,
             timeout=10
