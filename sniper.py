@@ -35,20 +35,21 @@ def isitvalid(name):
         print(f"[X] {name} has already been checked")
         return False
     else:
-   try:
-       results = r.get(
-            api + name,
-            headers=headers,
-            timeout=10
-        )
-        if results.status_code == 404:
-            checked.add(name)
-            sendtowebhook(name)
-            print(f"[V] {name} may be available!")
-            return True
-        else:
-            print(f"[X] {name} is taken!")
-            return False
+        try:
+            results = r.get(
+                api + name,
+                headers=headers,
+                timeout=10
+            )
+
+            if results.status_code == 404:
+                checked.add(name)
+                sendtowebhook(name)
+                print(f"[V] {name} may be available!")
+                return True
+            else:
+                print(f"[X] {name} is taken!")
+                return False
 
         except Exception as e:
             print(f"[!] Error: {e}")
