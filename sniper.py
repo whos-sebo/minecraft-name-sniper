@@ -29,20 +29,20 @@ def sendtowebhook(name):
         }
     ]
     r.post(webhook, json = data)
-
+  
 def isitvalid(name):
     if name in checked:
         print(f"[X] {name} has already been checked")
         return False
     else:
-             try:
+        try:
             results = r.get(
                 api + name + f"?at={int(time.time() - locktime)}",
                 headers=headers,
                 timeout=10
             )
 
-            if results.status_code == 404:
+            if "errorMessage" in str(results.text):
                 checked.add(name)
                 sendtowebhook(name)
                 print(f"[V] {name} is available!")
